@@ -7,6 +7,7 @@ import shapes
 
 def init_game():
     pygame.init()
+    
     screen = pygame.display.set_mode((config.WINDOW_WIDTH, config.WINDOW_HEIGHT)) # Use constanst from config
     pygame.display.set_caption(config.TITLE)
     return screen
@@ -20,54 +21,22 @@ def handle_events():
                 return False
     return True
 
+background_image = pygame.image.load('saturn_family1.jpg').convert()
+
+
+
+
 def main():
     screen = init_game()
+    screen.blit(background_image,[0,0])
     running = True
     clock = pygame.time.Clock() # Initialize the clock her
-    shapes_list = []
+    
     while running:
         running = handle_events()
         screen.fill(config.WHITE) # Use color from config
-        shape_type = random.randrange(3)
-
-        if shape_type == 0:
-
-            new_shape = {
-                'type': 'circle',
-                'color': (random.randrange(255),random.randrange(255),random.randrange(255)),
-                'position': (random.randrange(config.WINDOW_WIDTH),random.randrange(config.WINDOW_HEIGHT)),
-                'radius': 50
-            }
-
-        elif shape_type == 1:
-            new_shape = {
-               'type': 'rectangle',
-                'color': (random.randrange(255),random.randrange(255),random.randrange(255)),
-                'position': (random.randrange(config.WINDOW_WIDTH-100),random.randrange(config.WINDOW_HEIGHT-100)),
-                'width': 100,
-                'height': 100 
-            }
-
-        elif shape_type == 2:
-            new_shape = {
-               'type': 'line',
-                'color': (random.randrange(255),random.randrange(255),random.randrange(255)),
-                'start_pos': (random.randrange(config.WINDOW_WIDTH-100),random.randrange(config.WINDOW_HEIGHT-100)),
-                'end_pos': (random.randrange(config.WINDOW_WIDTH-100),random.randrange(config.WINDOW_HEIGHT-100)),
-                'width': 10
-            }
-
-        shapes_list.append(new_shape)
-
-
-        for shape in shapes_list:
-            if shape['type'] == 'circle':
-                shapes.draw_circle(screen,shape)
-            elif shape['type'] == 'rectangle':
-                shapes.draw_rect(screen,shape)
-            elif shape['type'] == 'line':
-                shapes.draw_line(screen,shape)
-
+        
+        
         pygame.display.flip()
 
         # Limit the frame rate to the specified frames per second (FPS)
